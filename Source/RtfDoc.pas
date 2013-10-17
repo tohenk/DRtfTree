@@ -53,6 +53,7 @@ type
     destructor Destroy; override;
   public
     procedure Save(const FileName: String);
+    function UseDefaultFont: TRtfDocument;
     function AddText(const AText: String; const AFont: TFont): TRtfDocument; overload;
     function AddText(const AText: String): TRtfDocument; overload;
     function AddNewLine(const N: Integer = 1): TRtfDocument; overload;
@@ -385,6 +386,12 @@ begin
   Tree := GetTree;
   if Assigned(Tree) then
     Tree.SaveToFile(FileName);
+end;
+
+function TRtfDocument.UseDefaultFont: TRtfDocument;
+begin
+  Result := Self;
+  UpdateFont(DefaultFont);
 end;
 
 function TRtfDocument.AddText(const AText: String; const AFont: TFont): TRtfDocument;
