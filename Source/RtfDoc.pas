@@ -63,6 +63,7 @@ type
       const AScaleX: Integer = 0; const AScaleY: Integer = 0): TRtfDocument; overload;
     function AddImage(const FileName: String; const AWidth, AHeight: Double;
       const AScaleX: Integer = 0; const AScaleY: Integer = 0): TRtfDocument; overload;
+    function AddWhitespace(const Whitespace: String = #13#10): TRtfDocument; overload;
     function ResetChar: TRtfDocument;
     function ResetParagraph: TRtfDocument;
     function ResetFormat: TRtfDocument;
@@ -462,6 +463,12 @@ begin
   ImgHeight := Round(RtfUnit.FromNative(RtfUnit.ToNative(AHeight, RtfUnit.Measurement),
     mPixel));
   Result := AddImage(FileName, ImgWidth, ImgHeight, AScaleX, AScaleY);
+end;
+
+function TRtfDocument.AddWhitespace(const Whitespace: String = #13#10): TRtfDocument;
+begin
+  Result := Self;
+  AddNode(TRtfTreeNode.Create(ntWhitespace, Whitespace));
 end;
 
 function TRtfDocument.ResetChar: TRtfDocument;
