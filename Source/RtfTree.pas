@@ -61,7 +61,7 @@ type
     function CreateCollection: TRtfTreeNodeCollection;
     procedure RemoveCollection(ACollection: TRtfTreeNodeCollection);
     function SelectChildNodesForText(const AText: String; const StartPos: Integer): TRtfTreeNodeCollection;
-    procedure CombineNodesText(Nodes: TRtfTreeNodeCollection);
+    function CombineNodesText(Nodes: TRtfTreeNodeCollection): TRtfTreeNode;
   public
     procedure AppendChild(ANode: TRtfTreeNode); overload;
     procedure AppendChild(ACollection: TRtfTreeNodeCollection); overload;
@@ -636,8 +636,12 @@ end;
 
 function TRtfTreeNode.IsPlainText: Boolean;
 begin
-  Result := (NodeType = ntText) and Assigned(ParentNode) and
-    (ParentNode.FirstChild.NodeType = ntKeyword) and (ParentNode.FirstChild.NodeKey <> '*');
+  Result := (NodeType = ntText);
+  if Result and Assigned(ParentNode) and
+    (ParentNode.FirstChild.NodeType = ntKeyword) and (ParentNode.FirstChild.NodeKey = '*') then
+  begin
+    Result := False;
+  end;
 end;
 
 function TRtfTreeNode.MustUseKeywordStop: Boolean;
@@ -707,20 +711,21 @@ begin
   end;
 end;
 
-procedure TRtfTreeNode.CombineNodesText(Nodes: TRtfTreeNodeCollection);
+function TRtfTreeNode.CombineNodesText(Nodes: TRtfTreeNodeCollection): TRtfTreeNode;
 var
-  CNode, ANode: TRtfTreeNode;
+  ANode: TRtfTreeNode;
 
 begin
+  Result := nil;
   if Assigned(Nodes) and (Nodes.Count > 1) then
   begin
-    CNode := Nodes[0];
-    if CNode.NodeType = ntGroup then
-      CNode := CNode.LastChild;
+    Result := Nodes[0];
+    if Result.NodeType = ntGroup then
+      Result := Result.LastChild;
     while Nodes.Count > 1 do
     begin
       ANode := Nodes[1];
-      CNode.NodeKey := CNode.NodeKey + ANode.Text;
+      Result.NodeKey := Result.NodeKey + ANode.Text;
       if Assigned(ANode.ParentNode) then
         ANode.ParentNode.RemoveChild(ANode);
       Nodes.Delete(1);
@@ -1118,6 +1123,7 @@ function TRtfTreeNode.ReplaceTextEx(const AFrom, ATo: String): Boolean;
 var
   i, P: Integer;
   ANodes: TRtfTreeNodeCollection;
+  CNode: TRtfTreeNode;
 
 begin
   Result := False;
@@ -1145,10 +1151,12 @@ begin
     ANodes := SelectChildNodesForText(AFrom, P);
     if Assigned(ANodes) then
     begin
-      CombineNodesText(ANodes);
-      ANodes[0].ReplaceTextEx(AFrom, ATo);
-      Result := True;
-      Exit;
+      CNode := CombineNodesText(ANodes);
+      if CNode <> nil then
+      begin
+        CNode.ReplaceTextEx(AFrom, ATo);
+        Result := True;
+      end;
     end;
   end;
 end;
