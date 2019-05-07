@@ -609,7 +609,7 @@ begin
         Result := Result + '”'
       else if IsEquals('emdash') then
         Result := Result + '—'
-      else if IsEquals('u') then
+      else if IsEquals('u') and (Parameter > 255) then
         Result := Result + DecodeChar(Parameter, TEncoding.Unicode);
     end;
   end;
@@ -1100,7 +1100,7 @@ begin
   Result := CreateCollection;
   for i := 0 to ChildNodes.Count - 1 do
   begin
-    if (ChildNodes[i].NodeType = ntText)  and (Pos(AText, ChildNodes[i].NodeKey) > 0) then
+    if (ChildNodes[i].NodeType = ntText) and (Pos(AText, ChildNodes[i].NodeKey) > 0) then
       Result.Add(ChildNodes[i]);
     Result.Append(ChildNodes[i].FindText(AText));
   end;
@@ -1113,7 +1113,7 @@ var
 begin
   for i := 0 to ChildNodes.Count - 1 do
   begin
-    if (ChildNodes[i].NodeType = ntText)  and (Pos(OldValue, ChildNodes[i].NodeKey) > 0) then
+    if (ChildNodes[i].NodeType = ntText) and (Pos(OldValue, ChildNodes[i].NodeKey) > 0) then
       ChildNodes[i].NodeKey := ReplaceStr(ChildNodes[i].NodeKey, OldValue, NewValue);
     ChildNodes[i].ReplaceText(OldValue, NewValue);
   end;
