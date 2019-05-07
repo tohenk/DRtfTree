@@ -1,0 +1,207 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{C46633FF-E24E-4530-8441-D98285460D69}</ProjectGuid>
+        <ProjectVersion>16.1</ProjectVersion>
+        <FrameworkType>None</FrameworkType>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+        <TargetedPlatforms>3</TargetedPlatforms>
+        <AppType>Console</AppType>
+        <MainSource>RtfTreeTests.dpr</MainSource>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='OSX32' and '$(Base)'=='true') or '$(Base_OSX32)'!=''">
+        <Base_OSX32>true</Base_OSX32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_1)'=='true') or '$(Cfg_1_Win32)'!=''">
+        <Cfg_1_Win32>true</Cfg_1_Win32>
+        <CfgParent>Cfg_1</CfgParent>
+        <Cfg_1>true</Cfg_1>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <SanitizedProjectName>RtfTreeTests</SanitizedProjectName>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Locale>1057</VerInfo_Locale>
+        <Manifest_File>None</Manifest_File>
+        <DCC_Namespace>System;Vcl;Vcl.Imaging;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_Define>_CONSOLE_TESTRUNNER;$(DCC_Define)</DCC_Define>
+        <DCC_UnitSearchPath>$(BDS)\Source\DUnit\src;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
+        <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
+        <DCC_E>false</DCC_E>
+        <DCC_N>false</DCC_N>
+        <DCC_S>false</DCC_S>
+        <DCC_F>false</DCC_F>
+        <DCC_K>false</DCC_K>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_OSX32)'!=''">
+        <DCC_UsePackage>DBXInterBaseDriver;DataSnapServer;DataSnapCommon;DbxCommonDriver;dbxcds;CustomIPTransport;dsnap;IndyIPServer;IndyCore;CloudService;FmxTeeUI;bindcompfmx;dbrtl;bindcomp;inetdb;xmlrtl;ibxpress;bindengine;soaprtl;FMXTee;DBXInformixDriver;DBXFirebirdDriver;inet;DBXSybaseASADriver;dbexpress;IndyIPClient;DBXSqliteDriver;fmx;IndySystem;DataSnapClient;DataSnapProviderClient;DBXOracleDriver;fmxase;IndyIPCommon;inetdbxpress;rtl;DbxClientDriver;IndyProtocols;DBXMySQLDriver;bindcompdbx;fmxobj;fmxdae;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_UsePackage>dxBarRS18;JvGlobus;dxPSCoreRS18;JvMM;JvManagedThreads;cxTreeListRS18;dxPSPrVwAdvRS18;lmdrttoolsdb;dxDockingRS18;frxDB18;dxThemeRS18;dxPSdxOCLnkRS18;gtDocEngD18;ZTestFramework;JvCrypt;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;cxTreeListdxBarPopupMenuRS18;dxSkinsdxBarPainterRS18;JvNet;JvDotNetCtrls;dclfrxTee18;DbxCommonDriver;lmdrtinspector;vclimg;dbxcds;DatasnapConnectorsFreePascal;JvXPCtrls;dxSkinscxPCPainterRS18;vcldb;cxExportRS18;lmdrtweb;lmdrtprint;dcldxSkinsCoreRS18;lmdrtchartdb;lmdrtrtfdb;CustomIPTransport;dsnap;IndyIPServer;IndyCore;cxVerticalGridRS18;CloudService;dxPSdxDBOCLnkRS18;FmxTeeUI;lmdrtrtf;dxADOServerModeRS18;NTQRPlus_R18;dxPScxExtCommonRS18;JvDB;JvRuntimeDesign;lmdrtide;cxEditorsRS18;cxSchedulerRS18;dxSpellCheckerRS18;dxPScxVGridLnkRS18;lmdrtrtlx;JclDeveloperTools;dxRibbonRS18;lmdrtshell;bindcompfmx;vcldbx;cxBarEditItemRS18;cxPageControlRS18;dbrtl;lmdrtstorage;acntDelphiXE4_R;bindcomp;inetdb;lmdrtgrid;JvPluginSystem;DBXOdbcDriver;JvCmp;tdbf_d18r;JvTimeFramework;xmlrtl;ibxpress;dxBarExtItemsRS18;frxe18;vclactnband;bindengine;soaprtl;FMXTee;bindcompvcl;cxSpreadSheetRS18;Jcl;vclie;cxPivotGridRS18;dxmdsRS18;dxBarDBNavRS18;dxTileControlRS18;NTDBCore_R18;dxComnRS18;dxBarExtDBItemsRS18;DBXInformixDriver;dxPScxSchedulerLnkRS18;Intraweb;fsTee18;dxNavBarRS18;CPortLib18;dsnapcon;DBXFirebirdDriver;dxPSTeeChartRS18;inet;dxSkinscxSchedulerPainterRS18;dxPScxCommonRS18;JvPascalInterpreter;vclx;DBXSybaseASADriver;lmdrtsearchdb;dbexpress;dxDBOrRS18;IndyIPClient;JvBDE;dxGDIPlusRS18;lmdrttools;lmdrtscript;dxLayoutControlRS18;lmdrttxtdb;ZComponent;DBXSqliteDriver;lmdrtchart;fmx;lmdrttxt;IndySystem;JvDlgs;TeeDB;frx18;inetdbbde;vclib;DataSnapClient;dxPScxTLLnkRS18;dxOrgCRS18;cxSchedulerGridRS18;dxtrmdRS18;DataSnapProviderClient;gtQRExpD18;DBXSybaseASEDriver;MetropolisUILiveTile;dxPSLnksRS18;vcldsnap;dxPScxPivotGridLnkRS18;lmdrtsys;lmdrteldb;QR5RunDXE4;DBXDb2Driver;dxPScxSSLnkRS18;DBXOracleDriver;dxServerModeRS18;JvCore;vclribbon;dxSkinsdxDLPainterRS18;fmxase;vcl;lmdrtelpro;IndyIPCommon;DBXMSSQLDriver;cxPivotGridChartRS18;JvAppFrm;inetdbxpress;webdsnap;dxPScxGridLnkRS18;dxSkinsCoreRS18;lmdrtdocking;cxLibraryRS18;JvDocking;adortl;JvWizards;lmdrtcore;dxPSdxDBTVLnkRS18;JvHMI;lmdrtthemes;JvBands;ZDbc;fs18;rtl;DbxClientDriver;ZPlain;lmdrtbar;NTCore_R18;Tee;JclContainers;JvSystem;svnui;JvControls;lmdrtdesign;dxDBXServerModeRS18;IndyProtocols;DBXMySQLDriver;lmdrtsearch;dxFlowChartRS18;bindcompdbx;TeeUI;JvJans;JvPrintPreview;JvPageComps;JvStdCtrls;JvCustom;ZCore;vcltouch;dxPSPrVwRibbonRS18;lmdrtelcore;dxPSdxFCLnkRS18;VclSmp;cxGridRS18;DataSnapConnectors;dxPSDBTeeChartRS18;lmdrtplugin;dxdbtrRS18;fsDB18;SynEdit_RXE4;dxCoreRS18;fmxobj;JclVcl;dxSkinsdxNavBarPainterRS18;lmdrtsyntax;ZParseSql;lmdrtfx;svn;dxPSdxLCLnkRS18;fmxdae;cxPivotGridOLAPRS18;cxDataRS18;bdertl;frxTee18;lmdrtl;lmdrtscriptimp;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_UsePackage>dxBarRS18;dxPSCoreRS18;cxTreeListRS18;dxPSPrVwAdvRS18;lmdrttoolsdb;dxDockingRS18;dxThemeRS18;dxPSdxOCLnkRS18;ZTestFramework;DBXInterBaseDriver;DataSnapServer;DataSnapCommon;cxTreeListdxBarPopupMenuRS18;DbxCommonDriver;lmdrtinspector;vclimg;dbxcds;DatasnapConnectorsFreePascal;vcldb;cxExportRS18;lmdrtweb;lmdrtprint;dcldxSkinsCoreRS18;lmdrtchartdb;lmdrtrtfdb;CustomIPTransport;dsnap;IndyIPServer;IndyCore;cxVerticalGridRS18;CloudService;dxPSdxDBOCLnkRS18;FmxTeeUI;lmdrtrtf;dxADOServerModeRS18;dxPScxExtCommonRS18;lmdrtide;cxEditorsRS18;cxSchedulerRS18;dxSpellCheckerRS18;dxPScxVGridLnkRS18;lmdrtrtlx;dxRibbonRS18;lmdrtshell;bindcompfmx;cxBarEditItemRS18;cxPageControlRS18;dbrtl;lmdrtstorage;acntDelphiXE4_R;bindcomp;inetdb;lmdrtgrid;DBXOdbcDriver;xmlrtl;ibxpress;dxBarExtItemsRS18;vclactnband;bindengine;soaprtl;FMXTee;bindcompvcl;cxSpreadSheetRS18;vclie;cxPivotGridRS18;dxmdsRS18;dxBarDBNavRS18;dxTileControlRS18;dxComnRS18;dxBarExtDBItemsRS18;DBXInformixDriver;dxPScxSchedulerLnkRS18;Intraweb;dxNavBarRS18;dsnapcon;DBXFirebirdDriver;dxPSTeeChartRS18;inet;dxPScxCommonRS18;vclx;DBXSybaseASADriver;lmdrtsearchdb;dbexpress;dxDBOrRS18;IndyIPClient;dxGDIPlusRS18;lmdrttools;lmdrtscript;dxLayoutControlRS18;lmdrttxtdb;ZComponent;DBXSqliteDriver;lmdrtchart;fmx;lmdrttxt;IndySystem;TeeDB;vclib;DataSnapClient;dxPScxTLLnkRS18;dxOrgCRS18;cxSchedulerGridRS18;dxtrmdRS18;DataSnapProviderClient;DBXSybaseASEDriver;MetropolisUILiveTile;dxPSLnksRS18;vcldsnap;dxPScxPivotGridLnkRS18;lmdrtsys;lmdrteldb;DBXDb2Driver;dxPScxSSLnkRS18;DBXOracleDriver;dxServerModeRS18;vclribbon;fmxase;vcl;lmdrtelpro;IndyIPCommon;DBXMSSQLDriver;cxPivotGridChartRS18;inetdbxpress;webdsnap;dxPScxGridLnkRS18;dxSkinsCoreRS18;lmdrtdocking;cxLibraryRS18;adortl;lmdrtcore;dxPSdxDBTVLnkRS18;lmdrtthemes;ZDbc;rtl;DbxClientDriver;ZPlain;lmdrtbar;Tee;lmdrtdesign;dxDBXServerModeRS18;IndyProtocols;DBXMySQLDriver;lmdrtsearch;dxFlowChartRS18;bindcompdbx;TeeUI;ZCore;vcltouch;dxPSPrVwRibbonRS18;lmdrtelcore;dxPSdxFCLnkRS18;VclSmp;cxGridRS18;DataSnapConnectors;dxPSDBTeeChartRS18;lmdrtplugin;dxdbtrRS18;SynEdit_RXE4;dxCoreRS18;fmxobj;lmdrtsyntax;ZParseSql;lmdrtfx;dxPSdxLCLnkRS18;fmxdae;cxPivotGridOLAPRS18;cxDataRS18;lmdrtl;lmdrtscriptimp;DataSnapIndy10ServerTransport;$(DCC_UsePackage)</DCC_UsePackage>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_DebugDCUs>true</DCC_DebugDCUs>
+        <DCC_Optimize>false</DCC_Optimize>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+        <DCC_DebugInfoInExe>true</DCC_DebugInfoInExe>
+        <DCC_RemoteDebug>true</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <DCC_RemoteDebug>false</DCC_RemoteDebug>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="..\..\Source\RtfClasses.pas"/>
+        <DCCReference Include="..\..\Source\RtfToken.pas"/>
+        <DCCReference Include="..\..\Source\RtfLex.pas"/>
+        <DCCReference Include="..\..\Source\RtfTree.pas"/>
+        <DCCReference Include="..\..\Source\RtfImg.pas"/>
+        <DCCReference Include="..\..\Source\RtfObj.pas"/>
+        <DCCReference Include="..\..\Source\RtfDoc.pas"/>
+        <DCCReference Include="..\..\Test\TestRtfBase.pas"/>
+        <DCCReference Include="..\..\Test\TestRtfTreeNode.pas"/>
+        <DCCReference Include="..\..\Test\TestRtfTreeNodes.pas"/>
+        <DCCReference Include="..\..\Test\TestRtfLoad.pas"/>
+        <DCCReference Include="..\..\Test\TestRtfSelection.pas"/>
+        <DCCReference Include="..\..\Test\TestRtfReplace.pas"/>
+        <DCCReference Include="..\..\Test\TestRtfHeaderSections.pas"/>
+        <DCCReference Include="..\..\Test\TestRtfImage.pas"/>
+        <DCCReference Include="..\..\Test\TestRtfObject.pas"/>
+        <DCCReference Include="..\..\Test\TestRtfDoc.pas"/>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Delphi.Personality>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">False</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">1</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">0</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1057</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="Comments"/>
+                    <VersionInfoKeys Name="CFBundleName"/>
+                    <VersionInfoKeys Name="CFBundleDisplayName"/>
+                    <VersionInfoKeys Name="UIDeviceFamily"/>
+                    <VersionInfoKeys Name="CFBundleIdentifier"/>
+                    <VersionInfoKeys Name="CFBundleVersion"/>
+                    <VersionInfoKeys Name="CFBundlePackageType"/>
+                    <VersionInfoKeys Name="CFBundleSignature"/>
+                    <VersionInfoKeys Name="CFBundleAllowMixedLocalizations"/>
+                    <VersionInfoKeys Name="UISupportedInterfaceOrientations"/>
+                    <VersionInfoKeys Name="CFBundleExecutable"/>
+                    <VersionInfoKeys Name="CFBundleResourceSpecification"/>
+                    <VersionInfoKeys Name="LSRequiresIPhoneOS"/>
+                    <VersionInfoKeys Name="CFBundleInfoDictionaryVersion"/>
+                    <VersionInfoKeys Name="CFBundleDevelopmentRegion"/>
+                </VersionInfoKeys>
+                <Source>
+                    <Source Name="MainSource">RtfTreeTests.dpr</Source>
+                </Source>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k180.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp180.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Deployment/>
+            <Platforms>
+                <Platform value="OSX32">False</Platform>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">True</Platform>
+            </Platforms>
+            <UnitTesting>
+                <TestFramework>DUnit / Delphi Win32</TestFramework>
+                <TestRunner>GUI</TestRunner>
+                <SourceProjectName>D:\DProjects\Lib\DRtfTree\Package\XE4\RtfTree_XE4.dproj</SourceProjectName>
+                <TestProjectName/>
+            </UnitTesting>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>
