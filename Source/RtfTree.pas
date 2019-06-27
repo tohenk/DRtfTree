@@ -1526,7 +1526,11 @@ begin
     Count := HexStream.Read(HexBuffer, HEX_BUF_SIZE * 2);
     if Count = 0 then
       Break;
+{$IF CompilerVersion > 23.0}
     HexToBin(HexBuffer, 0, Buffer, 0, Count div 2);
+{$ELSE}
+    HexToBin(PAnsiChar(@HexBuffer[0]), Buffer, Count div 2);
+{$IFEND}
     BinStream.Write(Buffer, Count div 2);
   end;
 end;
@@ -1546,7 +1550,11 @@ begin
     Count := BinStream.Read(Buffer, HEX_BUF_SIZE);
     if Count = 0 then
       Break;
+{$IF CompilerVersion > 23.0}
     BinToHex(Buffer, 0, HexBuffer, 0, Count);
+{$ELSE}
+    BinToHex(Buffer, PAnsiChar(@HexBuffer[0]), Count);
+{$IFEND}
     HexStream.Write(HexBuffer, Count * 2);
   end;
 end;
