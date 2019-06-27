@@ -1526,7 +1526,7 @@ begin
     Count := HexStream.Read(HexBuffer, HEX_BUF_SIZE * 2);
     if Count = 0 then
       Break;
-    HexToBin(HexBuffer, Buffer, Count div 2);
+    HexToBin(HexBuffer, 0, Buffer, 0, Count div 2);
     BinStream.Write(Buffer, Count div 2);
   end;
 end;
