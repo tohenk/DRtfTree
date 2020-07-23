@@ -3,7 +3,7 @@ unit RtfTree;
 interface
 
 uses
-  Classes, SysUtils, StrUtils, DateUtils, UITypes, RtfToken, RtfLex, RtfClasses;
+  Classes, SysUtils, StrUtils, DateUtils, UITypes, RtfToken, RtfLex, RtfClasses, Encoding;
 
 type
 
@@ -281,6 +281,7 @@ type
     FStyleSheets: TRtfStyleSheets;
     FEncoding: TEncoding;
     FIgnoreWhitespace: Boolean;
+    FEncodingBuffer: TEncodingBuffer;
   protected
     procedure ResetAll;
     function ForceTokenAsText(AToken: TRtfToken): Boolean;
@@ -1525,7 +1526,11 @@ begin
     Count := HexStream.Read(HexBuffer, HEX_BUF_SIZE * 2);
     if Count = 0 then
       Break;
+{$IF CompilerVersion > 23.0}
     HexToBin(HexBuffer, 0, Buffer, 0, Count div 2);
+{$ELSE}
+    HexToBin(PAnsiChar(@HexBuffer[0]), Buffer, Count div 2);
+{$IFEND}
     BinStream.Write(Buffer, Count div 2);
   end;
 end;
@@ -1545,7 +1550,11 @@ begin
     Count := BinStream.Read(Buffer, HEX_BUF_SIZE);
     if Count = 0 then
       Break;
+{$IF CompilerVersion > 23.0}
     BinToHex(Buffer, 0, HexBuffer, 0, Count);
+{$ELSE}
+    BinToHex(Buffer, PAnsiChar(@HexBuffer[0]), Count);
+{$IFEND}
     HexStream.Write(HexBuffer, Count * 2);
   end;
 end;
@@ -1679,6 +1688,7 @@ end;
 
 constructor TRtfTree.Create;
 begin
+  FEncodingBuffer:=TEncodingBuffer.Create;
   FRoot := TRtfTreeNode.Create(ntRoot, 'ROOT');
   FRoot.Tree := Self;
   FMergeSpecialCharacters := False;
@@ -1697,6 +1707,7 @@ begin
   FreeAndNil(FFontTables);
   FreeAndNil(FColorTables);
   FreeAndNil(FStyleSheets);
+  FEncodingBuffer.Free;
   inherited;
 end;
 
@@ -1718,7 +1729,11 @@ begin
   FSource := AStream;
   FSource.Position := 0;
   FLex := DefaultRtfLex.Create(FSource);
-  Result := ParseRtfTree;
+  try
+    Result := ParseRtfTree;
+  finally
+    FreeAndNil(FLex);
+  end;
   // is RTF valid?
   if Result = 0 then
   begin
@@ -1886,7 +1901,7 @@ begin
               if MergeSpecialCharacters then
               begin
                 if (FLevel = 1) and (NNode.NodeType = ntKeyword) and (NNode.NodeKey = 'ansicpg') then
-                  FEncoding := TEncoding.GetEncoding(NNode.Parameter);
+                  FEncoding := FEncodingBuffer.GetEncoding(NNode.Parameter);
               end;
             end;
           end;
@@ -1914,7 +1929,7 @@ var
 begin
   ANode := RootNode.SelectSingleNode('ansicpg');
   if Assigned(ANode) then
-    FEncoding := TEncoding.GetEncoding(ANode.Parameter);
+    FEncoding := FEncodingBuffer.GetEncoding(ANode.Parameter);
 end;
 
 procedure TRtfTree.GetInfoGroup;
